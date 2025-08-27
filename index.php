@@ -22,22 +22,34 @@
          
 
                 <?php 
-                if (isset ($_REQUEST['email']) && $_REQUEST ['email'] = 'empty') {
+                if (isset ($_REQUEST['email']) && $_REQUEST ['email'] == 'empty') {
                       echo '<p class="text-danger">Email is Required!</p>';
+                }else if(isset($_REQUEST['email']) && $_REQUEST['email'] =='invalid'){
+                    echo '<p class="text-danger">Invalid Email</p>';
+                }else if (isset($_REQUEST['email']) && $_REQUEST['email'] == 'wrong'){
+                    echo'<p class="text-danger">Email Do Not Match</p>';
                 }
+            
+                
                 ?>
                               
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" name ="password" class="form-control" id="password" placeholder="Enter your password">
+                <input type="password" name ="password" class="form-control <?php  if (isset ($_REQUEST ['password']) && $_REQUEST ['password'] == 'empty') { echo 'is-invalid';} ?>" id="password" placeholder="Enter your password">
            <?php  
-           if(isset($_REQUEST ['password']) && $_REQUEST['password'] = 'wrong'){
-            echo'<p class="text-danger">Password is wrong</p>';
+           if(isset($_REQUEST ['password']) && $_REQUEST['password'] = 'empty'){
+            echo'<p class="text-danger">Password is required</p>';
            }else if((isset($_REQUEST ['password']) && $_REQUEST['password'] = 'short'))
    echo'<p class="text-danger">Password is too short</p>';
            
+          else if((isset($_REQUEST ['password']) && $_REQUEST['password'] = 'short')){
+             echo'<p class="text-danger">Password dose not matching </p>';
            
+          }
+  
+           
+  
            ?>
            
             </div>
