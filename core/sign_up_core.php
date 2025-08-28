@@ -1,11 +1,15 @@
 
 
 <?php
-$data_email = 'prity123@gmail.com';
-$data_password ='123456';
 
-$signup_email = $_REQUEST['email'];
-$signup_password = $_REQUEST['password'];
+require_once 'db.php';
+
+
+
+
+$signup_email =htmlspecialchars($_REQUEST['email']) ;
+$signup_password =htmlspecialchars($_REQUEST['password']) ;
+$full_name =htmlspecialchars($_REQUEST['full_name']);
 
 
 

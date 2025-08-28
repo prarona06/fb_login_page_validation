@@ -14,14 +14,8 @@
 <body>
 
     <div class="login-card bop">
-        <h3>Register Here</h3>
+        <h3>Login</h3>
         <form action ="./core/sign_up_core.php" method = "post">
-             <div class="mb-3">
-                <label for="name" class="form-label"> Full Name <span class="text-danger"></span></label>
-                <input type="name"  name ="fullname" class="form-control" id="name" placeholder="Enter your name">
-        
-                                       
-            </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email address <span class="text-danger">*</span></label>
                 <input type="email"  name ="email" class="form-control <?php  if (isset ($_REQUEST ['email']) && $_REQUEST ['email'] == 'empty') { echo 'is-invalid';} ?>" id="email" placeholder="Enter your email">
@@ -36,6 +30,7 @@
                     echo'<p class="text-danger">Email Do Not Match</p>';
                 }
             
+                
                 ?>
                               
             </div>
@@ -59,14 +54,13 @@
            
             </div>
             <div class="d-grid mb-3">
-                <button type="submit" class="btn btn-login">Sign Up</button>
+                <button type="submit" class="btn btn-login">Login</button>
             </div>
             <div class="text-center">
                 <a href="#">Forgot password?</a>
             </div>
         </form>
-                
-
+        <hr>
         
     </div>
 
