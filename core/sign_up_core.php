@@ -30,7 +30,7 @@ $insert_query = "INSERT INTO students(`st_name`,`st_pass`,`st_email`) VALUES ('$
 $run_query = mysqli_query($connect, $insert_query);
 
 if ($run_query) {
-    header('Location: ../index.php?signup=success');
+    header('Location: ../login.php?signup=success');
     exit;
 } else {
     header('Location: ../index.php?signup=failed');
