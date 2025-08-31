@@ -38,12 +38,12 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" name ="password" class="form-control <?php  if (isset ($_REQUEST ['password']) && $_REQUEST ['password'] == 'empty') { echo 'is-invalid';} ?>" id="password" placeholder="Enter your password">
            <?php  
-           if(isset($_REQUEST ['password']) && $_REQUEST['password'] = 'empty'){
+           if(isset($_REQUEST ['password']) && $_REQUEST['password'] == 'empty'){
             echo'<p class="text-danger">Password is required</p>';
-           }else if((isset($_REQUEST ['password']) && $_REQUEST['password'] = 'short'))
+           }else if((isset($_REQUEST ['password']) && $_REQUEST['password'] == 'short'))
    echo'<p class="text-danger">Password is too short</p>';
            
-          else if((isset($_REQUEST ['password']) && $_REQUEST['password'] = 'short')){
+          else if((isset($_REQUEST ['password']) && $_REQUEST['password'] == 'wrong')){
              echo'<p class="text-danger">Password dose not matching </p>';
            
           }

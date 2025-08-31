@@ -1,51 +1,38 @@
-
-
 <?php
-
 require_once 'db.php';
 
+$signup_email    = htmlspecialchars($_REQUEST['email']);
+$signup_password = htmlspecialchars($_REQUEST['password']);
+$full_name       = htmlspecialchars($_REQUEST['fullname']);
 
-
-
-$signup_email =htmlspecialchars($_REQUEST['email']) ;
-$signup_password =htmlspecialchars($_REQUEST['password']) ;
-$full_name =htmlspecialchars($_REQUEST['full_name']);
-
-
-
-if (empty($signup_email))  {
-  header('Location: ../index.php?email=empty');
-}else{
-  if(filter_var($signup_email, FILTER_VALIDATE_EMAIL)){
-   if ($signup_email !== $data_email){
-    header('Location:..index.php?email=wrong');
-   }
-  }else{
-    header('Location:../index.php?email=invalid');
-  }
+// check empty
+if (empty($signup_email) || empty($signup_password)) {
+    $err = ['email'=>'empty', 'password'=>'empty'];
+    $qstring = http_build_query($err);
+    header('Location: ../index.php?' . $qstring);
+    exit;
 }
 
-
-
-if (!empty($signup_password)){
-  $pLen =strLen($signup_password);
-
-  if($pLen >=5){
-    if ($signup_password !== $data_password) {
-header('Location ../index.php?password=wrong');
-    } 
- 
- }else{
-    header('Location:../index.php?password=short');
-  }
-
-}else{
-  header ('Location: ../index.php?password=empty');
+// validate email
+if (!filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
+    header('Location: ../index.php?email=invalid');
+    exit;
 }
 
+// password length check
+if (strlen($signup_password) < 5) {
+    header('Location: ../index.php?password=short');
+    exit;
+}
 
+// insert into database
+$insert_query = "INSERT INTO students(`st_name`,`st_pass`,`st_email`) VALUES ('$full_name','$signup_password','$signup_email')";
+$run_query = mysqli_query($connect, $insert_query);
 
-
-
-     
-  
+if ($run_query) {
+    header('Location: ../index.php?signup=success');
+    exit;
+} else {
+    header('Location: ../index.php?signup=failed');
+    exit;
+}

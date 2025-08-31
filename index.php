@@ -16,7 +16,20 @@
     <div class="login-card bop">
         <h3>Register Here</h3>
         <form action ="./core/sign_up_core.php" method = "post">
-             <div class="mb-3">
+            <?php
+            if(isset ($_REQUEST ['signup'])){
+                if($_REQUEST['signup'] == 'success'){
+                    echo '<p class="text-danger">Signup Successful </p>';
+                }
+                if($_REQUEST['signup'] == 'failed'){
+                    echo '<p class="text-danger">Signup failed </p>';
+                }
+            }
+            
+            ?>
+        
+        
+        <div class="mb-3">
                 <label for="name" class="form-label"> Full Name <span class="text-danger"></span></label>
                 <input type="name"  name ="fullname" class="form-control" id="name" placeholder="Enter your name">
         
