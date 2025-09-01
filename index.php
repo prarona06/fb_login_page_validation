@@ -1,3 +1,13 @@
+<?php  
+session_start();
+if (isset($_SESSION['email'])){
+    header('Location: ./profile.php');
+    exit;
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +24,11 @@
 <body>
 
     <div class="login-card bop">
+        <div class="mb-3">
+
+           <?php  require_once 'menu.php'; ?>
+
+        </div>
         <h3>Register Here</h3>
         <form action ="./core/sign_up_core.php" method = "post">
             <?php
