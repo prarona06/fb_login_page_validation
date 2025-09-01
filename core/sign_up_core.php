@@ -5,6 +5,11 @@ $signup_email    = htmlspecialchars($_REQUEST['email']);
 $signup_password = htmlspecialchars($_REQUEST['password']);
 $full_name       = htmlspecialchars($_REQUEST['fullname']);
 
+
+$signup_password =password_hash($signup_password,PASSWORD_DEFAULT);
+var_dump($signup_password);
+exit;
+
 // check empty
 if (empty($signup_email) || empty($signup_password)) {
     $err = ['email'=>'empty', 'password'=>'empty'];

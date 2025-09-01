@@ -1,3 +1,10 @@
+<?php
+require_once './core/db.php';
+
+?>
+
+
+
 <ul>
     <?php
     if (isset($_SESSION['email'])){
