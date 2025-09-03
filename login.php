@@ -45,6 +45,15 @@ if (isset($_SESSION['email'])){
           
            
             </div>
+
+            <div class="mb-3">
+                <div class="from-check">
+                    <input type="checkbox" class="from-check-input" value="" id="flexCheck">
+                    <label for="flexCheckDefault" class="form-check-label">
+                        Remember me
+                    </label>
+                </div>
+            </div>
             <?php
             
             if(isset($_REQUEST['error']) && $_REQUEST['error'] =='failed'){

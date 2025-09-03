@@ -15,9 +15,6 @@ $dbname ='register_db';
  if (!$connect){
             echo "<h1> ErrornEstablishing Database Connection!</h1>";
             exit;
-        }else{
-echo "<h1> Database Connection Established </h1>";
-            
         }
     
 
