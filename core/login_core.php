@@ -8,12 +8,12 @@ session_start();
 $email = htmlspecialchars($_REQUEST['email']);
 $password =htmlspecialchars($_REQUEST['password']);
 
-$hashEmail =base64_encode($email);
+/*$hashEmail =base64_encode($email);
 echo $hashEmail;
 echo"<br>";
 $decrypt =base64_decode($hashEmail);
 echo $decrypt;
-exit;
+*/
 
 $_SESSION['email'] =$email;
 
@@ -31,7 +31,7 @@ if(!$run_query){
 
 if(mysqli_num_rows($run_query) > 0){ //mysqli_num_rows function rows count kore
     $data =mysqli_fetch_assoc($run_query); //// fetch mane tule niye asa assoc  diye array akare dite pari
-    if ($data['st_email'] == $email &&   password_verify($password,data['st_pass'])){
+    if ($data['st_email'] == $email &&   password_verify($password,$data['st_pass'])){
 
         $_SESSION['email'] = $email;
 
@@ -42,11 +42,11 @@ if(mysqli_num_rows($run_query) > 0){ //mysqli_num_rows function rows count kore
 
     
   header('Location: ../profile.php');
-  exit;
+ 
 
 }else{
     header('Location: ../index.php?error=failed');
-exit;
+
 }
 
 }else{

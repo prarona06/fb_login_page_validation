@@ -1,7 +1,7 @@
 <?php session_start();
 if (!isset($_SESSION['email'])){
     header('Location: ./index.php');
-    exit;
+    
 }
 ?>
 
@@ -28,25 +28,37 @@ if (!isset($_SESSION['email'])){
 
 
                 <tr>
+                    <th>SL</th>
                     <th>NAME</th>
                     <th>EMAIL</th>
                     <th>ACTION</th>
                 </tr>
-                 <tr>
-                    <th>NAME</th>
-                    <th>EMAIL</th>
-                    <th>ACTION</th>
-                </tr>
+               
                 <?php 
                 $students ="SELECT * FROM students";
                 $run_query = mysqli_query($connect, $students);
-                
-                ?>
+
+                if(mysqli_num_rows($run_query) >0){
+                    $i =1;
+
+                    while($students = mysqli_fetch_assoc($run_query)){
+
+                  
+                    ?>
+    
                  <tr>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
+                     <th><?php echo $i ; $i++;?></th>
+                    <th><?php echo $students['st_name']?></th>
+                    <th><?php echo $students['st_email']?></th>
+                    <th>
+                        <a href="#"> Edit</a>
+                         <a href="#"> Delete</a>
+                </th>
                 </tr>
+            <?php
+                }
+                  }
+                ?>
             </table>
         </div>
 </body>

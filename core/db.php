@@ -29,4 +29,3 @@ $dbname ='register_db';
 
 
 
-?>
