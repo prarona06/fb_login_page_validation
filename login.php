@@ -1,9 +1,11 @@
 <?php  
-session_start();
-if (isset($_SESSION['email'])){
-    header('Location: ./profile.php');
-    exit;
+
+
+if (isset($_COOKIE['PHPCOOKISET'])){
+    header('Location:./profile.php');
+
 }
+
 
 ?>
 

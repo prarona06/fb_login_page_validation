@@ -33,7 +33,7 @@ if(mysqli_num_rows($run_query) > 0){ //mysqli_num_rows function rows count kore
     $data =mysqli_fetch_assoc($run_query); //// fetch mane tule niye asa assoc  diye array akare dite pari
     if ($data['st_email'] == $email &&   password_verify($password,$data['st_pass'])){
 
-        $_SESSION['email'] = $email;
+        //$_SESSION['email'] = $email;
 
         $cookie_value = sha1(md5($data['st_email']).$data['st_pass']);
         var_dump($cookie_value);

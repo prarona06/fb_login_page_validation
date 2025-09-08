@@ -1,10 +1,11 @@
-<?php session_start();
-if (!isset($_SESSION['email'])){
+<?php
+
+session_start();
+if (!isset($_SESSION['email'])) {
     header('Location: ./index.php');
-    
+    exit;
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,50 +17,87 @@ if (!isset($_SESSION['email'])){
 <body>
 
    <div class="mb-3">
+       <?php require_once 'menu.php'; ?>
+       <h1>This is profile page</h1>
+      
+   </div>
+   <div>
+<a href="./add_user.php">
+<button type="button" class ="btn btn-primary">Add User</button>
+</a>
 
-           <?php  require_once 'menu.php'; ?>
+   </div>
+   <?php 
+if (isset ($_REQUEST['user']))
+{
+    if($_REQUEST['user'] == 'delete'){
+        echo '<p class="text-success">User deleted successfully</p>';
+    }
+     if($_REQUEST['user'] == 'failed'){
+        echo '<p class="text-success">User deleted failed</p>';
+    }
+     if($_REQUEST['user'] == 'added'){
+        echo '<p class="text-success">User added successfully</p>';
+    }
+    }
 
-    <h1>This is profile page</h1>
-    <p>Email: <?php echo $_SESSION['email'];?></p>
-    
-        </div>
-        <div>
-           <table border="1" style="border-collapse: collapse; width: 100%;">
 
+   ?>
 
-                <tr>
-                    <th>SL</th>
-                    <th>NAME</th>
-                    <th>EMAIL</th>
-                    <th>ACTION</th>
-                </tr>
-               
-                <?php 
-                $students ="SELECT * FROM students";
-                $run_query = mysqli_query($connect, $students);
+   <div>
+       <table border="1" style="border-collapse: collapse; width: 100%;">
+           <tr>
+               <th>SL</th>
+               <th>NAME</th>
+               <th>EMAIL</th>
+               <th>ACTION</th>
+           </tr>
+           
+           <?php 
+           $query ="SELECT * FROM students";
+           $run_query = mysqli_query($connect, $query);
 
-                if(mysqli_num_rows($run_query) >0){
-                    $i =1;
+           if (mysqli_num_rows($run_query) > 0) {
+               $i = 1;
+               while ($student = mysqli_fetch_assoc($run_query)) {
+           ?>
+               <tr>
+                   <td><?php echo $i; $i++; ?></td>
+                   <td><?php echo $student['st_name']; ?></td>
+                   <td><?php echo $student['st_email']; ?></td>
+                   <td>
+                       <a class="edit" href="edit_user.php?id=<?php echo $student['id']; ?>">Edit</a> | 
+                       <a class="delete" href="core/delete_user.php?id=<?php echo $student['id']; ?>">Delete</a>
+                   </td>
+               </tr>
+           <?php
+               }
+           }
+           ?>
+       </table>
+   </div>
 
-                    while($students = mysqli_fetch_assoc($run_query)){
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+   <script type="text/javascript">
+       $(document).ready(function(){
+           $(".delete").on("click", function(e){
+               e.preventDefault();
+               let path = $(this).attr("href");
 
-                  
-                    ?>
-    
-                 <tr>
-                     <th><?php echo $i ; $i++;?></th>
-                    <th><?php echo $students['st_name']?></th>
-                    <th><?php echo $students['st_email']?></th>
-                    <th>
-                        <a href="#"> Edit</a>
-                         <a href="#"> Delete</a>
-                </th>
-                </tr>
-            <?php
-                }
-                  }
-                ?>
-            </table>
-        </div>
+               if (confirm("Are you sure you want to delete this user?")) {
+                   $.ajax({
+                       type: "GET",
+                       url: path,
+                       success: function(response){
+                           console.log("Successfully deleted!");
+                           
+                       }
+                     
+                   });
+               }
+           });
+       });
+   </script>
+
 </body>
 </html>
